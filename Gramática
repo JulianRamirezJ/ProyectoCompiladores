@@ -1,0 +1,10 @@
+terminales Programa, id, FinPrograma, tipoDato, pComa, coma, Leer
+non terminales INICIO, ACCIONES, DEF_VARIABLE,DEF_VARIABLE_LIST
+
+
+INICIO::= Programa id ACCIONES FinPrograma
+ACCIONES::= DEF_VARIABLE | ENTRADA_DATOS
+DEF_VARIABLE::= tipoDato id DEF_VARIABLE_LIST
+DEF_VARIABLE_LIST::= pComa |coma id DEF_VARIABLE_LIST 
+ENTRADA_DATOS::= Leer id ENTRADA_DATOS_LIST
+ENTRADA_DATOS_LIST::= pComa | coma id ENTRADA_DATOS_LIST

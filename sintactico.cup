@@ -1,0 +1,38 @@
+import java_cup.runtime.*;
+// Código del usuario para el parser
+parser code {:
+    public String errsin="";
+    public void syntax_error (Symbol x){
+    errsin+="\nError Sintaxis en pos " + (x.left+1) + "," + (x.right+1);
+    throw new UnsupportedOperationException (errsin);
+}
+:};
+
+// Codigo de lo usuarios para definir gramática
+// Definiciones de las variables tanto terminales como no terminales
+
+terminal Programa,id,FinPrograma,tipoDato,pComa,coma,Leer,Escribir,igual,suma,resta,division,multiplicacion,Si,Entonces,Sino,FinSi,dParentesis,iParentesis,Mientras,hacer,FinMientras,Para,hasta,paso,FinPara,menor,mayor,igualIgual,menorIgual,mayorIgual,cad,numero
+non terminal INICIO,ACCIONES,DEF_VARIABLE,DEF_VARIABLE_LIST,ENTRADA_DATOS,ENTRADA_DATOS_LIST,SALIDA_DATOS,SALIDA_DATOS_LIST,ASIGNACION,EXPRESION,EXPRESION_CADENA,EXPRESION_LIST,OPERACION,CONDICIONAL,CONDICION,CONDICIONF,CMIENTRAS,CPARA,ID_NUM,PASOP,CPARA_CONT
+
+
+INICIO ::= Programa id ACCIONES FinPrograma;
+ACCIONES ::= DEF_VARIABLE | ENTRADA_DATOS | SALIDA_DATOS | ASIGNACION | CONDICIONAL | CMIENTRAS;
+DEF_VARIABLE ::= tipoDato id DEF_VARIABLE_LIST;
+DEF_VARIABLE_LIST ::= pComa |coma id DEF_VARIABLE_LIST ;
+ENTRADA_DATOS ::= Leer id ENTRADA_DATOS_LIST;
+ENTRADA_DATOS_LIST ::= pComa | coma id ENTRADA_DATOS_LIST;
+SALIDA_DATOS ::= Escribir id SALIDA_DATOS_LIST;
+SALIDA_DATOS_LIST ::= pComa | coma id SALIDA_DATOS_LIST;
+ASIGNACION ::= id igual EXPRESION pComa;
+EXPRESION ::= id EXPRESION_LIST | numero EXPRESION_LIST | cad EXPRESION_LIST;
+EXPRESION_LIST ::= OPERACION EXPRESION | pComa;
+CONDICIONAL ::= Si iParentesis CONDICION dParentesis Entonces ACCIONES CONDICIONF;
+CONDICION ::= ID_NUM OPERACION_BOOL ID_NUM;
+CONDICIONF ::= FinSi | Sino ACCIONES FinSi;
+CMIENTRAS ::= Mientras iParentesis CONDICION dParentesis hacer ACCIONES FinMientras;
+CPARA ::= Para id igual ID_NUM hasta ID_NUM PASOP;
+PASOP ::= paso ID_NUM CPARA_CONT | CPARA_CONT;
+CPARA_CONT ::= ACCIONES FinPara;
+ID_NUM ::= id | numero;
+OPERACION ::= suma | resta | multiplicacion | division;
+OPERACION_BOOL ::= menor | mayor | igualIgual | menorIgual | mayorIgual;

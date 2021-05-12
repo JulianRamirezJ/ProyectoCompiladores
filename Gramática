@@ -1,7 +1,7 @@
 terminales Programa, id, FinPrograma, tipoDato, pComa, coma, Leer, Escribir, igual,suma,resta,division,multiplicacion,Si,
-Entonces,Sino,FinSi,dParentesis,iParentesis,Mientras,hacer,FinMientras,Para,hasta,paso,FinPara,menor,mayor,igualIgual
+Entonces,Sino,FinSi,dParentesis,iParentesis,Mientras,hacer,FinMientras,Para,hasta,paso,FinPara,menor,mayor,igualIgual,menorIgual,mayorIgual, cad
 non terminales INICIO, ACCIONES, DEF_VARIABLE,DEF_VARIABLE_LIST,ENTRADA_DATOS,ENTRADA_DATOS_LIST,SALIDA_DATOS
-SALIDA_DATOS_LIST,ASIGNACION,EXPRESION,EXPRESION_LIST,OPERACION,CONDICIONAL,CONDICION,CONDICIONF,CMIENTRAS,CPARA
+SALIDA_DATOS_LIST,ASIGNACION,EXPRESION,EXPRESION_CADENA,EXPRESION_LIST,OPERACION,CONDICIONAL,CONDICION,CONDICIONF,CMIENTRAS,CPARA,
 ID_NUM,PASOP,CPARA_CONT
 
 
@@ -14,7 +14,7 @@ ENTRADA_DATOS_LIST::= pComa | coma id ENTRADA_DATOS_LIST
 SALIDA_DATOS::= Escribir id SALIDA_DATOS_LIST
 SALIDA_DATOS_LIST::= pComa | coma id SALIDA_DATOS_LIST
 ASIGNACION ::= id igual EXPRESION pComa
-EXPRESION ::= id EXPRESION_LIST | numero EXPRESION_LIST 
+EXPRESION ::= id EXPRESION_LIST | numero EXPRESION_LIST | cad EXPRESION_LIST
 EXPRESION_LIST ::= OPERACION EXPRESION | pComa
 CONDICIONAL ::= Si iParentesis CONDICION dParentesis Entonces ACCIONES CONDICIONF 
 CONDICION ::= ID_NUM OPERACION_BOOL ID_NUM
@@ -25,4 +25,4 @@ PASOP ::= paso ID_NUM CPARA_CONT | CPARA_CONT
 CPARA_CONT ::= ACCIONES FinPara
 ID_NUM ::= id | numero
 OPERACION ::= suma | resta | multiplicacion | division
-OPERACION_BOOL ::= menor | mayor | igualIgual
+OPERACION_BOOL ::= menor | mayor | igualIgual | menorIgual | mayorIgual
